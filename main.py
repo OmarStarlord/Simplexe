@@ -15,14 +15,14 @@ def input_simplex_problem():
     # entrez variables de fonctions de maximisation
     print("Entrez les coef de la fonction a maximiser:")
     for i in range(num_variables):
-        coefficient = int(input(f"Enter coefficient for variable {i+1}: "))
-        table[0][i+1] = -coefficient  # Shift by 1 because of the added column
+        coefficient = int(input(f"Entrez coefficient for variable {i+1}: "))
+        table[0][i+1] = -coefficient  
 
     print("Entrez les coef des contraintes:")
     for i in range(1, num_constraints + 1):
         print(f"For constraint {i}:")
         for j in range(num_variables):
-            coefficient = int(input(f"Enter coefficient for variable {j+1}: "))
+            coefficient = int(input(f"Entrez coefficient de la variable {j+1}: "))
             table[i][j+1] = coefficient  
 
         table[i][num_variables + i] = 1  
@@ -64,7 +64,7 @@ def trouver_ligne_pivot(table, pivot_col):
    
     pivot_row = min(ratios)[1]  
     print(f"La ligne pivot est: {pivot_row+1}")
-    print(f"La ligne du pivot est: {table[pivot_row+1]}") 
+    print(f"La ligne du pivot est: {table[pivot_row]}") 
     return pivot_row
 
 
@@ -122,12 +122,26 @@ while True:
         print("Plus de valeurs négatives dans la 1ère ligne. Le tableau est optimal.")
         break
 
+
+
+SEPARATOR = "-" * 50
+
+print("\n")
+print(SEPARATOR)
 print("\nFinal Table after simplex iterations:")
 for row in t:
     print(row)
-    
+print(SEPARATOR)
+print(SEPARATOR)
     
 
+
+print("\n")
+print(SEPARATOR)
 print("\nSolutions:")
+# print the last element in last column of first row
+# which is the solution
+print("Z= ", t[0][-1])
 for i in range(1, len(t)):
     print(f"X{i} = {t[i][-1]}")
+print(SEPARATOR)
